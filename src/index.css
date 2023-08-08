@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Roboto:wght@300;400;500;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+}
+
+.top-nav {
+  background: #283194;
+}
+
+.homepage {
+  position: relative;
+}
+.homepage::before {
+  content: '';
+  position: absolute;
+  opacity: 1;
+  inset: 0;
+  background: url('./assets/amb_bg_5.jpg');
+  background-size: 100%;
+  filter: brightness(80%);
+  z-index: -999;
+}
+
+thead tr {
+  @apply bg-blue-400;
+  text-align: left;
+}
+
+tbody tr:nth-child(2n) {
+  @apply bg-slate-300;
+}
+tbody tr:nth-child(2n-1) {
+  @apply bg-slate-200;
+}
+
+.posts-table {
+  @apply text-slate-700;
+}
+
+.posts-table thead {
+  @apply text-slate-100;
+}
+
+.posts-table th,
+.posts-table td {
+  padding: 10px 20px;
+}
+
+.posts-table .view,
+.posts-table .edit,
+.posts-table .delete {
+  padding-inline: 5px;
+}
+
+form input,
+form textarea {
+  border: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-size: 0.9325rem;
+  @apply text-slate-300;
+}
+
+.post-body {
+  font-family: 'Inter', sans-serif;
+}
