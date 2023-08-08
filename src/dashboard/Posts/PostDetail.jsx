@@ -3,10 +3,34 @@ import { useEffect, useState } from 'react';
 import Loader from '../../components/loader';
 
 const PostDetail = ({ postDetail, imgUrl }) => {
+  // {postDetail, imgUrl} used above is called destructuring syntax that allows us to directly pull the values
+  // from the received object
+
+  // By default the child components receives the object called props that contains all the passed props
+  // if you find this intimidating you can use this syntax
+
+  /*
+  const PostDetail = (props) => {
+    const postDetail = props.postDetail;
+    const imgUrl = props.imgUrl;
+    .
+    .
+    // rest code same
+  }
+  */
+
+  // same destructuring used here too
   const { id, title, body } = postDetail;
+
+  // states to store the API fetched comments
   const [comments, setComments] = useState([]);
+
+  // loading state to show loading animation when data is still being fetched
   const [isLoading, setIsLoading] = useState(true);
 
+  // react hook that runs every time it's dependencies change
+  // since the dependency array is empty in this case is empty, it runs only once when it is first mounted to the dom
+  // mounted to the dom means when the component is first visible in the webpage
   useEffect(() => {
     // function to fetch comments from the api
     const fetchComments = async () => {
@@ -18,7 +42,9 @@ const PostDetail = ({ postDetail, imgUrl }) => {
         const { data } = await axios.get(
           `https://jsonplaceholder.typicode.com/comments?postId=${randomId}`
         );
+        // store fetched comments in the comments state
         setComments(data);
+        // set loading to false when the fetching is completed
         setIsLoading(false);
       } else {
         const { data } = await axios.get(
@@ -28,6 +54,7 @@ const PostDetail = ({ postDetail, imgUrl }) => {
         setIsLoading(false);
       }
     };
+    // call the fetch function immediately
     fetchComments();
   }, []);
   return (
@@ -52,6 +79,8 @@ const PostDetail = ({ postDetail, imgUrl }) => {
           {isLoading && <Loader className=" w-[50px] h-[50px]" />}
           {!isLoading && (
             <div className=" mt-5 comments-container flex flex-col gap-5">
+              {/* the map array method runs some logic for every element in the comments array. 
+              In our case it returns the given markup for every comment in the comments array. */}
               {comments.map((comment) => {
                 return (
                   <div key={comment.id} className="flex gap-5">

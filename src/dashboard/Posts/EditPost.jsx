@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const EditPost = ({ posts, updatePosts, setOption, postDetail }) => {
-  // states to store postId , postTitle and postBody
+  // states to store postId , postTitle and postBody (input field values)
   const [postId, setPostId] = useState(postDetail.id);
   const [postTitle, setPostTitle] = useState(postDetail.title);
   const [postBody, setPostBody] = useState(postDetail.body);
@@ -12,9 +12,10 @@ const EditPost = ({ posts, updatePosts, setOption, postDetail }) => {
     if (!postTitle || !postBody)
       return alert('Please fill out all the fields!');
 
-    // get the index of the post that is being edited and write the new values into that
+    // get the index of the post that is being edited
     const postIndex = posts.findIndex((post) => post.id == postId);
 
+    // overwrite the values of that element with new values
     const updatedPost = posts.slice();
     updatedPost[postIndex].title = postTitle;
     updatedPost[postIndex].body = postBody;
@@ -22,6 +23,8 @@ const EditPost = ({ posts, updatePosts, setOption, postDetail }) => {
     // update the posts state in the parent component
     updatePosts(updatedPost);
     alert('Post updated successfully!');
+
+    // route to the page that displays table once the post has been updated
     setOption('all');
   };
 
@@ -38,6 +41,7 @@ const EditPost = ({ posts, updatePosts, setOption, postDetail }) => {
           maxLength={75}
           value={postTitle}
           onInput={(e) => {
+            // synchronizes the input field values with the state when user inputs anything on the input field
             setPostTitle(e.target.value);
           }}
         />
@@ -56,6 +60,7 @@ const EditPost = ({ posts, updatePosts, setOption, postDetail }) => {
         <button
           type="button"
           className="px-6 py-2 rounded-sm shadow-md bg-blue-500 hover:bg-blue-600 transition-colors duration-300 inline-block w-max text-white"
+          // call handleSubmit when user clicks on the submit button
           onClick={handleSubmit}
         >
           Submit
