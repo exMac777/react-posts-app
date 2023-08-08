@@ -11,3 +11,4 @@ npm install
 ```bash
 npm run dev
 ```
+#### once you do this, your project should be up and running
